@@ -1,0 +1,31 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+{% block content %}
+<h4>Hi, {{g.user.firstname}} {{g.user.lastname}}!</h4>
+{% include 'flash.html' %}
+<div class="row">
+        <div class="col-md-8 col-md-offset-4">
+            <h3>Edit User</h3> 
+
+{% from "_formhelpers.html" import render_field %}
+<form class="form" method="post" action="{{url_for('edituser',id=id)}}" role="form">
+                    {{form.hidden_tag()}}
+  <dl>
+    {{ render_field(form.password) }}
+    {{ render_field(form.confirm) }}
+    {{ render_field(form.status)}}
+    {{ render_field(form.uwiId) }}
+    {{ render_field(form.userInitial) }}
+    {{ render_field(form.salutation) }}
+    {{ render_field(form.marker) }}
+    {{ render_field(form.tutor) }}
+    {{ render_field(form.lecturer) }}
+  </dl>
+  <p><input type="submit" value="Edit User"> </p>
+</form>
+
+
+      </div>
+    </div>
+
+{% endblock %}
