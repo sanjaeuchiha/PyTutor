@@ -11,4 +11,5 @@ MAX_CONTENT_LENGTH = 1 * 1024 * 1024
 CRSF_ENABLED = True
 SECRET_KEY= 'fsfsfafasfN?*sfsdf'
 
-SQLALCHEMY_DATABASE_URI='mysql://root:''@localhost/TimeTable'
+SQLALCHEMY_DATABASE_URI='mysql://root:''@localhost/c9'
+#SQLALCHEMY_DATABASE_URI='mysql://root:''@localhost/timetable'
