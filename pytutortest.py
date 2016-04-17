@@ -1,6 +1,6 @@
 from flask import Flask
 from flask.ext.testing import TestCase
-from app import app
+from app import app, db, models
 import unittest
 
 
@@ -9,6 +9,16 @@ class mytest(TestCase):
     def create_app(self):
         app.config['TESTING'] = True
         self.app = app.test_client()
+        
+    def setUp(self):
+        db.create_all()
+        db.session.add(User('2','sanjae_allen@hotmail.com','Bunny', 'Allen' 'admin', 'active', 'administrator'))
+        db.session.commit()
+        
+    def tearDown(self):
+        db.session.remove()
+        db.drop_all()
+        
         
      #test if the login page loads correctly    
     def test_login_page_load(self):
