@@ -1,0 +1,4 @@
+ def setUp(self):
+        db.create_all()
+        db.session.add(models.User('2','sanjae_allen@hotmail.com','Bunny', 'Allen' 'admin', 'active', 'administrator'))
+        db.session.commit()
