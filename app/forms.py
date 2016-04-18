@@ -61,7 +61,7 @@ ANSWER=[
 def getRooms():
     result = []
     result = [("", "-- Choose a Room --")]
-    rooms = Room.query.order_by(Room.RoomId).all()
+    rooms = db.session.query(Room).order_by(Room.RoomId).all()
     for room in rooms:
         result.append((room.RoomId, room.RoomId))
     return result
@@ -70,7 +70,7 @@ def getRooms():
 def getCourses():
     result = []
     result = [("", "-- Choose a Course --")]
-    courses = Course.query.order_by(Course.OtherCode).all()
+    courses = db.session.query(Course).order_by(Course.OtherCode).all()
     for course in courses:
         result.append((course.OtherCode, course.OtherCode))
     return result
@@ -79,7 +79,7 @@ def getCourses():
 def getCourseTypes():
     result = []
     result = [("", "-- Choose a Course Type --")]
-    coursetypes = CourseType.query.order_by(CourseType.CourseType).all()
+    coursetypes = db.session.query(CourseType).order_by(CourseType.CourseType).all()
     for coursetype in coursetypes:
         result.append((coursetype.CourseType, coursetype.CourseType))
     return result
@@ -88,7 +88,7 @@ def getCourseTypes():
 def getInitials():
     result = []
     result = [("", "-- Choose a User --")]
-    users = User.query.order_by(User.firstname).all()
+    users = db.session.query(User).order_by(User.firstname).all()
     for user in users:
         result.append((user.userInitial, user.firstname + ' '+user.lastname))
     return result
@@ -97,7 +97,7 @@ def getInitials():
 def getInitialsTutor():
     result = []
     result = [("", "-- Choose a User --")]
-    users = User.query.filter_by(tutor='YES').order_by(User.firstname).all()
+    users = db.session.query(User).filter_by(tutor='YES').order_by(User.firstname).all()
     for user in users:
         result.append((user.userInitial, user.firstname + ' '+user.lastname))
     return result

@@ -1,6 +1,6 @@
 from flask import Flask
 from flask.ext.testing import TestCase
-from app import app, db, models
+from app import app, models, db
 import unittest
 
 
@@ -12,18 +12,16 @@ class mytest(TestCase):
         
     def setUp(self):
         db.create_all()
-        db.session.add(User('2','sanjae_allen@hotmail.com','Bunny', 'Allen' 'admin', 'active', 'administrator'))
+        db.session.add(models.User('2','sanjae_allen@hotmail.com','Bunny', 'Allen' 'admin', 'active', 'administrator'))
         db.session.commit()
         
     def tearDown(self):
-        db.session.remove()
         db.drop_all()
-        
         
      #test if the login page loads correctly    
     def test_login_page_load(self):
         rv = self.app.get('/', content_type ='html/text')
-        self.assertEqual(rv.status_code,'200')
+        self.assertEqual(rv.status_code, 200)
         
     #test if login form behaves correctly given correct credentials
     def test_correct_login(self):
@@ -38,12 +36,12 @@ class mytest(TestCase):
         follow_redirects=True 
         )
         assert 'The username or password you entered is incoorect' in rv.data
-    
+   
     #test the edit user form loads with correct user id 
     def test_correct_edituser(self):
         self.app.post('/', data=dict(email="sanjae_allen@hotmail.com", password="admin"), follow_redirects=True)
         rv = self.app.post('/edituser/2')
-        assertEqual(rv.status_code,'200')
+        self.assertEqual(rv.status_code, 200)
     
     #test if edituser page requires someone to be logged in 
     def test_edituser_requires_login(self):
@@ -58,6 +56,6 @@ class mytest(TestCase):
     
     
         
-        
+       
 if __name__ == '__main__':
     unittest.main()

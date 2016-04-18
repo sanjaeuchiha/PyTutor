@@ -1,7 +1,9 @@
 # coding: utf-8
 from hashlib import md5
-from app import db
+from . import db
 from app import app
+import json
+from marshmallow import Schema, fields, pprint
 
 ROLE_USER = 0
 ROLE_ADMIN = 1

@@ -49,7 +49,7 @@ def before_request():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = db.session.query(User).filter_by(email=form.email.data).first()
         if user:
             flash('There is already a user with this email!', category='danger')
             return redirect(url_for('register'))
@@ -80,7 +80,7 @@ def login():
     form = LoginForm()
 
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = db.session.query(User).filter_by(email=form.email.data).first()
         if not user:
             flash(
                 'The username or password you entered is incorrect!',
